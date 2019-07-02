@@ -1,0 +1,17 @@
+# Youtube-dl Part Files
+*.part
+*.ytdl
+
+# Downloaded File
+*.mov
+*.mpeg4
+*.mp4
+*.avi
+*.wmv
+*.flv
+*.3gpp
+*.webm
+*.dnxhr
+*.prores
+*.cineform
+*.hevc
