@@ -8,7 +8,7 @@ import math
 import os
 
 channelURL = 'https://www.youtube.com/channel/UCR4z8ccOWNoUThB4VAMNBTg/videos'
-channelURL = 'https://www.youtube.com/channel/UCPLE-tmCc2KRvFZeUNB30sg'  # Deepak
+# channelURL = 'https://www.youtube.com/channel/UCPLE-tmCc2KRvFZeUNB30sg'  # Deepak
 
 while True:
 
@@ -89,7 +89,7 @@ while True:
         f.close()
 
         if(meta['id'] == lastDownload):
-            secondsToCheck = 10
+            secondsToCheck = 1800
             for i in range(secondsToCheck):
                 rem = secondsToCheck - i
                 os.system('cls')
