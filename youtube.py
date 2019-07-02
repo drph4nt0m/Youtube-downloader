@@ -24,20 +24,36 @@ while True:
     latestVideo = 'https://www.youtube.com' + \
         soup.select('a[aria-describedby]')[0]['href']
 
+    latestVideo = 'https://www.youtube.com/watch?v=m_u6P5k0vP0&t=132s'
+
     ######################## Youtube-dl ########################
 
     meta = {}
     currDownload = ''
+    currSize = 'Unknown'
 
     # Printing Head
     def printHeader():
         os.system('cls')
+
+        hours = math.floor(meta['duration']/3600)
+        mins = math.floor((meta['duration'] % 3600)/60)
+        secs = (meta['duration'] % 3600) % 60
+        if(hours < 10):
+            hours = '0' + str(hours)
+        if(mins < 10):
+            mins = '0' + str(mins)
+        if(secs < 10):
+            secs = '0' + str(secs)
+
         print('######################################### META INFO #########################################')
         print('  id          :', meta['id'])
         print('  title       :', meta['title'])
         print('  upload date :', meta['upload_date'])
         print('  uploader    :', meta['uploader'])
-        print('  duration    :', meta['duration'])
+        print('  duration    :', str(hours) +
+              ':' + str(mins) + ':' + str(secs))
+        print('  size        :', currSize)
         # print('  views       :', meta['view_count'])
         # print('  likes       :', meta['like_count'])
         # print('  dislikes    :', meta['dislike_count'])
@@ -45,11 +61,11 @@ while True:
         print('#############################################################################################')
 
     # Print Progress
-    def progress(per, speed, total, eta):
+    def progress(per, speed, eta):
         printHeader()
         perF = math.floor(float(per[:-1])/2)
         print('|', '█'*perF, ' '*(50-perF), '|', sep='', end='')
-        print(per + ' of ~' + total + ' at ' + speed + ' ETA ', eta)
+        print(per + ' at ' + speed + ' ETA ', eta)
 
     # Logger
     class MyLogger(object):
@@ -66,8 +82,7 @@ while True:
     # Hook
     def my_hook(d):
         if d['status'] == 'downloading':
-            progress(d['_percent_str'], d['_speed_str'],
-                     d['_total_bytes_estimate_str'], d['_eta_str'])
+            progress(d['_percent_str'], d['_speed_str'], d['_eta_str'])
         if d['status'] == 'finished':
             print('Finished Downloading, now converting...')
             f = open('lastVideo.txt', 'w')
