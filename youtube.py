@@ -79,6 +79,11 @@ while True:
 
     # Hook
     def my_hook(d):
+        global currSize
+        try:
+            currSize = d['_total_bytes_str']
+        except AttributeError:
+            print('Not')
         if d['status'] == 'downloading':
             progress(d['_percent_str'], d['_speed_str'], d['_eta_str'])
         if d['status'] == 'finished':
