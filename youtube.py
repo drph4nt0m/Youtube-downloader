@@ -24,8 +24,6 @@ while True:
     latestVideo = 'https://www.youtube.com' + \
         soup.select('a[aria-describedby]')[0]['href']
 
-    latestVideo = 'https://www.youtube.com/watch?v=m_u6P5k0vP0&t=132s'
-
     ######################## Youtube-dl ########################
 
     meta = {}
